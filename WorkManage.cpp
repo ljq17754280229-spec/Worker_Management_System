@@ -24,6 +24,51 @@ workerManage::workerManage()
 {
     this->ComNums = 0;
     this->w = NULL;
+    int te_num = 0;
+
+    int Department_ID;  // 部门编号
+    string Personal_ID; // 职工编号
+    string Name;        // 姓名
+    string Job;
+
+    ifstream ifs;
+    ifs.open("User_information.txt", ios::in);
+    if (!ifs.is_open())
+    {
+        cout << "文件打开失败" << endl;
+    }
+    while (ifs >> Personal_ID >> Name >> Department_ID >> Job)
+    {
+        te_num++;
+    }
+    ifs.close();
+    ComNums = te_num;
+    w = new worker *[ComNums];
+    ifs.open("User_information.txt", ios::in);
+    if (!ifs.is_open())
+    {
+        cout << "未找到该文件" << endl;
+    }
+    int j = 0;
+    while (ifs >> Personal_ID >> Name >> Department_ID >> Job)
+    {
+        worker *p;
+        p = NULL;
+        if (Department_ID == 1)
+        {
+            p = new Employee(Personal_ID, Name, Job);
+        }
+        else if (Department_ID == 2)
+        {
+            p = new Manager(Personal_ID, Name, Job);
+        }
+        else if (Department_ID == 3)
+        {
+            p = new Boss(Personal_ID, Name, Job);
+        }
+        w[j] = p;
+        j++;
+    }
 }
 
 void workerManage::Addinfo()
@@ -96,52 +141,14 @@ void workerManage::Save()
     }
     ofs.close();
 }
+
 void workerManage::Showinfo()
 {
-    int te_num = 0;
     int Department_ID;  // 部门编号
     string Personal_ID; // 职工编号
     string Name;        // 姓名
-    string Job;         // 职务
-
+    string Job;
     ifstream ifs;
-    ifs.open("User_information.txt", ios::in);
-    if (!ifs.is_open())
-    {
-        cout << "文件打开失败" << endl;
-    }
-    while (ifs >> Personal_ID >> Name >> Department_ID >> Job)
-    {
-        te_num++;
-    }
-    ifs.close();
-    ComNums = te_num;
-    w = new worker *[ComNums];
-    ifs.open("User_information.txt", ios::in);
-    if (!ifs.is_open())
-    {
-        cout << "未找到该文件" << endl;
-    }
-    int j = 0;
-    while (ifs >> Personal_ID >> Name >> Department_ID >> Job)
-    {
-        worker *p;
-        p = NULL;
-        if (Department_ID == 1)
-        {
-            p = new Employee(Personal_ID, Name, Job);
-        }
-        if (Department_ID == 2)
-        {
-            p = new Manager(Personal_ID, Name, Job);
-        }
-        if (Department_ID == 3)
-        {
-            p = new Boss(Personal_ID, Name, Job);
-        }
-        w[j] = p;
-        j++;
-    }
 
     if (ComNums == 0)
     {
@@ -160,4 +167,11 @@ void workerManage::Showinfo()
             w[i]->duty();
         }
     }
+}
+void workerManage::delete_person()
+{
+    string target_personnal_ID;
+    cout << "输入待删除员工的编号：";
+    cin >>  target_personnal_ID;
+    
 }

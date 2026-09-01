@@ -4,13 +4,14 @@
 class workerManage
 {
 public:
-    void manu();        // 打印菜单
-    void Addinfo();     // 增加员工信息
-    workerManage();     // 初始化
-    void Save();        // 保存到文件里
-    void Showinfo();    // 显示职工信息
+    void manu();            // 打印菜单
+    void Addinfo();         // 增加员工信息
+    workerManage();         // 初始化
+    void Save();            // 保存到文件里
+    void Showinfo();        // 显示职工信息
+    void delete_person();   // 删除员工信息
 private:
-    int ComNums;        // 公司总人数
-    worker **w;         // 存储父类指针的数组
+    int ComNums;            // 公司总人数
+    worker **w;             // 存储父类指针的数组
 
 };
