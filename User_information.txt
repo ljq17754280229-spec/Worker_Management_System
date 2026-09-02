@@ -2,6 +2,6 @@
 3001 twistzz 3 老板
 1001 broky 1 员工
 1003 rops 1 员工
-3002 donk 3 老板
 3003 kyousuke 3 老板
 2002 monesy 2 经理
+1004 Jcobb 1 员工

@@ -11,7 +11,8 @@ public:
     void Showinfo();        // 显示职工信息
     void Delete_person();   // 删除员工信息
     void Update_person();   // 修改职工信息
-    int Find_person();     // 按照编号寻找职工
+    int Find_person();      // 按照编号寻找职工
+    void Search_person();
 private:
     int ComNums;            // 公司总人数
     worker **w;             // 存储父类指针的数组

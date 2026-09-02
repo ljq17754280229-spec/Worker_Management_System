@@ -186,13 +186,14 @@ int workerManage::Find_person()
 }
 void workerManage::Delete_person()
 {
-    if (Find_person() == -1)
+    int index = Find_person();
+    if (index == -1)
     {
         return;
     }
     else
     {
-        for (int j = Find_person(); j < ComNums - 1; j++)
+        for (int j = index; j < ComNums - 1; j++)
         {
             w[j] = w[j + 1];
         }
@@ -242,5 +243,12 @@ void workerManage::Update_person()
         }
         w[index] = new_worker;
     }
+}
+void workerManage::Search_person()
+{
+    cout <<"输入"
+    Find_person();
+    int index = Find_person();
+
 }
 
