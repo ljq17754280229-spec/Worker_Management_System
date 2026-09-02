@@ -6,7 +6,7 @@ using namespace std;
 int main(void)
 {
     workerManage wm;
-    wm.manu();
+    wm.Menu();
     int choice = 0;
     while (1)
     {
@@ -14,21 +14,23 @@ int main(void)
         cin >> choice;
         switch (choice)
         {
-        case 0:             // 退出程序
+        case 0:                     // 退出程序
             cout << "已退出管理程序" << endl;
             exit(0);
-        case 1:             // 增加职工
+        case 1:                     // 增加职工
             wm.Addinfo();
             wm.Save();
             break;
-        case 2:             // 显示职工信息
+        case 2:                     // 显示职工信息
             wm.Showinfo();
             break;
-        case 3:             // 删除职工信息
-            wm.delete_person();
-            wm.Save();      //保存最新的职工信息
+        case 3:                     // 删除职工信息
+            wm.Delete_person();
+            wm.Save();              //保存最新的职工信息
             break;
-        case 4: // 修改职工信息
+        case 4:                     // 修改职工信息
+            wm.Update_person();
+            wm.Save();    
             break;
         case 5: // 查找职工信息
             break;

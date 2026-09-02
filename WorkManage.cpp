@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void workerManage::manu()
+void workerManage::Menu()
 {
     cout << "----------------------" << endl;
     cout << "欢迎使用职工管理系统" << endl;
@@ -168,31 +168,79 @@ void workerManage::Showinfo()
         }
     }
 }
-void workerManage::delete_person()
+int workerManage::Find_person()
 {
     string target_personnal_ID;
-    int index = 0, is_found = 0;
-    cout << "输入待删除员工的编号：";
+    int index = 0;
+    cout << "输入员工的编号：";
     cin >> target_personnal_ID;
     for (int i = 0; i < ComNums; i++)
     {
         if (target_personnal_ID == w[i]->getPersonal_ID())
         {
-            index = i;
-            is_found = 1;
-            break;          //找到了就跳出循环
+            return i;
         }
     }
-    if (is_found == 0)
+    cout << "未找到该名员工" << endl;
+    return -1;
+}
+void workerManage::Delete_person()
+{
+    if (Find_person() == -1)
     {
-        cout << "未找到该名员工" << endl;
         return;
     }
-
-    for (int j = index; j < ComNums - 1; j++)
+    else
     {
-        w[j] = w[j + 1];
+        for (int j = Find_person(); j < ComNums - 1; j++)
+        {
+            w[j] = w[j + 1];
+        }
     }
     ComNums--;
+    cout << "现在公司一共有 " << ComNums << "名" << "员工" << endl;
+}
+void workerManage::Update_person()
+{
+    int index = Find_person();
+    int Department_ID;
+    string Personal_ID;
+    string Name;
+    string Job;
+    worker *new_worker;
+    new_worker = NULL;
+    if (index == -1)
+    {
+        return;
+    }
+    else
+    {
+        delete w[index];
+        w[index] = NULL;
+
+        cout << "输入该员工修改后的信息：";
+        cout << "新部门编号：";
+        cin >> Department_ID;
+        cout << "新职工编号：";
+        cin >> Personal_ID;
+        cout << "姓名：";
+        cin >> Name;
+        cout << "新职务：";
+        cin >> Job;
+
+        if (Department_ID == 1)
+        {
+            new_worker = new Employee(Personal_ID, Name, Job);
+        }
+        else if (Department_ID == 2)
+        {
+            new_worker = new Manager(Personal_ID, Name, Job);
+        }
+        else if (Department_ID == 3)
+        {
+            new_worker = new Boss(Personal_ID, Name, Job);
+        }
+        w[index] = new_worker;
+    }
 }
 
