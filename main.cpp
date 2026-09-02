@@ -14,17 +14,19 @@ int main(void)
         cin >> choice;
         switch (choice)
         {
-        case 0: // 退出程序
+        case 0:             // 退出程序
             cout << "已退出管理程序" << endl;
             exit(0);
-        case 1: // 增加职工
+        case 1:             // 增加职工
             wm.Addinfo();
             wm.Save();
             break;
-        case 2: // 显示职工信息
+        case 2:             // 显示职工信息
             wm.Showinfo();
             break;
-        case 3: // 删除职工信息
+        case 3:             // 删除职工信息
+            wm.delete_person();
+            wm.Save();      //保存最新的职工信息
             break;
         case 4: // 修改职工信息
             break;
@@ -39,3 +41,5 @@ int main(void)
 
     return 0;
 }
+// g++ *.cpp -o main.exe 编译main文件
+// g++ *.cpp -o main.exe ; .\main.exe 运行main文件

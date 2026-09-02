@@ -171,7 +171,28 @@ void workerManage::Showinfo()
 void workerManage::delete_person()
 {
     string target_personnal_ID;
+    int index = 0, is_found = 0;
     cout << "输入待删除员工的编号：";
-    cin >>  target_personnal_ID;
-    
+    cin >> target_personnal_ID;
+    for (int i = 0; i < ComNums; i++)
+    {
+        if (target_personnal_ID == w[i]->getPersonal_ID())
+        {
+            index = i;
+            is_found = 1;
+            break;          //找到了就跳出循环
+        }
+    }
+    if (is_found == 0)
+    {
+        cout << "未找到该名员工" << endl;
+        return;
+    }
+
+    for (int j = index; j < ComNums - 1; j++)
+    {
+        w[j] = w[j + 1];
+    }
+    ComNums--;
 }
+
