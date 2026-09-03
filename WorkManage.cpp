@@ -20,6 +20,7 @@ void workerManage::Menu()
     cout << "----7.清空所有数据----" << endl;
     cout << "----------------------" << endl;
 }
+
 workerManage::workerManage()
 {
     this->ComNums = 0;
@@ -127,6 +128,7 @@ void workerManage::Addinfo()
         cout << "现在公司一共有 " << ComNums << "名" << "员工" << endl;
     }
 }
+
 void workerManage::Save()
 {
     ofstream ofs;
@@ -168,6 +170,7 @@ void workerManage::Showinfo()
         }
     }
 }
+
 int workerManage::Find_person()
 {
     string target_personnal_ID;
@@ -184,6 +187,7 @@ int workerManage::Find_person()
     cout << "未找到该名员工" << endl;
     return -1;
 }
+
 void workerManage::Delete_person()
 {
     int index = Find_person();
@@ -201,6 +205,7 @@ void workerManage::Delete_person()
     ComNums--;
     cout << "现在公司一共有 " << ComNums << "名" << "员工" << endl;
 }
+
 void workerManage::Update_person()
 {
     int index = Find_person();
@@ -244,11 +249,63 @@ void workerManage::Update_person()
         w[index] = new_worker;
     }
 }
+
 void workerManage::Search_person()
 {
-    cout <<"输入"
-    Find_person();
-    int index = Find_person();
-
+    cout << "你正在查找职工：" << endl;
+    int is_find = Find_person();
+    if (is_find != -1)
+    {
+        cout << "该名职工的信息是：" << endl;
+        cout << "部门编号：" << w[is_find]->getDepartment_ID() << "    职工编号：" << w[is_find]->getPersonal_ID() << endl;
+        cout << "姓名：" << w[is_find]->getName() << "  职位：" << w[is_find]->getJob() << endl;
+        cout << "工作内容是：";
+        w[is_find]->duty();
+    }
 }
 
+void workerManage::Sort_person()
+{
+    worker *temp_person;
+    for (int i = 0; i < ComNums; i++)
+    {
+        for (int j = 0; j < ComNums - i - 1; j++)
+        {
+            if (w[j]->getPersonal_ID() > w[j + 1]->getPersonal_ID())
+            {
+                temp_person = w[j];
+                w[j] = w[j + 1];
+                w[j + 1] = temp_person;
+            }
+        }
+    }
+    cout << "排序完成!!!  顺序由低到高" << endl;
+}
+
+void workerManage::Clearinfo()
+{
+    int option = 0;
+    cout << "确定要清空所有数据吗？(1. 确认清空  2. 返回菜单)" << endl;
+    cin >> option;
+    if (option == 1)
+    {
+        for (int i = 0; i < ComNums; i++)
+        {
+            if (w[i] != NULL)
+            {
+                delete w[i];
+                w[i] = NULL;
+            }
+        }
+        delete[] w;
+        w = NULL;
+        ComNums = 0;
+
+        ofstream ofs("User_information.txt", ios::trunc);
+        ofs.close();
+    }
+    else
+    {
+        return;
+    }
+}
